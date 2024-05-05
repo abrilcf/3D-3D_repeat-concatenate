@@ -1,0 +1,27 @@
+# Please install torch 1.12.0+cu116
+# pip install torch==1.12.1+cu116 torchvision==0.13.1+cu116 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu116
+h5py==3.8.0
+matplotlib==3.7.1
+numpy==1.24.3
+pandas==2.0.2
+Pillow==9.5.0
+scikit_learn==1.2.2
+scipy==1.10.1
+seaborn==0.12.2
+nibabel==3.1.1
+tqdm==4.59.0
+einops==0.4.1
+tensorboardX==2.1
+pyyaml==6.0.1
+tabulate==0.9.0
+geomloss==0.2.6
+simpleitk==2.3.1
+scikit-image==0.22.0
+kornia==0.6.5
+wandb
+chardet==5.2.0
+pytorch-ignite==0.4.13
+captum==0.7.0
+timm==0.4.12
+tensorboard
+monai

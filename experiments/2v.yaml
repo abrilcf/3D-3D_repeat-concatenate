@@ -1,0 +1,92 @@
+experiment: swin_sinkhorn_2v
+model: swin-unetr
+data:
+  data_dir: /home2/datasets/baggage/lidc
+  num_proj: 2
+  image_size: 64
+  batch_size: 8
+  workers: 0
+  num_ch: 1
+  separate_views: True
+  aug_policy: 'color,geometric'
+  xray_scale: 128
+  dataset: chest
+  synthetic: False
+training:
+  self_sup: False
+  contrastive: False
+  temperature: 0.5
+  contrastive_weight: 1.0
+  self_weight: 0.2
+  amp: False
+  wandb_mode: online
+  adaptive_weight: False
+  max_d_weight: 0.1
+  steps: 5001
+  epochs: 200
+  t_iters: 10
+  use_feature_extractor: True
+  decay_steps: 1500
+  beta_1: 0.9
+  beta_2: 0.999
+  weight_decay: 1e-5
+  lr: 1e-5
+  optim: adamw
+  use_ema: True
+  ema_update_every: 5
+  ema_decay: 0.995
+  save_freq: 500
+  plot_freq: 25
+  test_g: True
+  epoch_test_g: 100
+  dataset: chest
+  manualSeed: 500
+  outf: ./outputs
+  features_mode: expand
+  groupnorm: False
+  attention: True
+sinkhorn:
+  mode: True
+  distance: euclidean
+  entropy_reg: 1.0
+  iterations: 10
+  critic_steps: 3
+  clip_value: 3
+ot:
+  f_weight: 100.0
+  cost_weight: 10.0
+testing:
+  models_dir: /media/abrilcf/899f2142-a79b-460e-b428-d45e0930f90b/extra/lap/PhD/Code/x2ct/no-ema-proj-loss/outputs/test/chest/weights
+  min_range: 39
+  max_range: 40
+  visual_best: True
+  freq: 50
+discriminator:
+  mode: enabled
+  model_weights_path:
+  optim_path:
+  l2_norm: True
+extractor:
+  base_filters: 16
+  n_layers: 3
+  train: False
+  cost_weight: 0.1
+autoencoder:
+  enc_nf: 64
+  dec_nf: 16
+  emb_dim: 2048
+  enc_ch_mult: [8, 4, 4, 4, 2, 2]
+  dec_ch_mult: [1, 2, 4, 8]
+  num_res_blocks: 1
+  enc_attn_resolutions: [16]
+  dec_attn_resolutions: [8]
+  resblock_name: depthwise_block
+  model_weights_path:
+  ema_weights_path:
+  optim_path:
+  add_noise: False
+  spatial_size: 8
+transformer:
+  feature_size: 48
+  grad_ckpt: False
+  cross_attn: False
